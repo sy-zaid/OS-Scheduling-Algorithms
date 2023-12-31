@@ -35,6 +35,12 @@ class process_list(list):
     def length(self):
         return self.num_processes
     
+    def isEmpty(self):
+        if self.num_processes == 0:
+            return True
+        else:
+            return False
+    
     def __getprocess__(self,ndx):
         return self.process_list[ndx]
     
@@ -47,8 +53,8 @@ class process_list(list):
             print(self.process_list[i])
             total_time += int(self.process_list[i].burst_time)
         return total_time
-            
-            
+        
+        
     def sortListByArrivalTime(self): 
         self.process_list.sort(key=lambda x: x.arrival_time) 
         return self.process_list

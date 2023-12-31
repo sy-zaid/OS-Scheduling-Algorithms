@@ -101,7 +101,7 @@ def FCFS(arrival_times,burst_times):
         
         curBT += 1
         print(curBT)
-    
+
 
     for p in job_que:
         if p.process_name not in execution_state:
