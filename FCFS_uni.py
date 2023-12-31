@@ -96,7 +96,6 @@ def FCFS(arrival_times,burst_times):
         if len(process_que) == 0:
             process_que.append(current_process)
             
-            
         if len(process_que) > 0:
             job_que.append(current_process)
         

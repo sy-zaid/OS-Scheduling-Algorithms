@@ -5,8 +5,9 @@ class process:
         self.burst_time = burst_time
         self.priority = priority
 
-class process_list():
+class process_list(list):
     def __init__(self,lst_arrival_times, lst_burst_times, lst_prior = None, qt = 0):
+        super().__init__()
         self.lst_arrival_times = lst_arrival_times
         self.lst_burst_times = lst_burst_times
         self.lst_prior = lst_prior
@@ -31,6 +32,23 @@ class process_list():
             
         return res
     
+    def length(self):
+        return self.num_processes
+    
+    def __getprocess__(self,ndx):
+        return self.process_list[ndx]
+    
+    def __iter__(self):
+        return ProcessListIterator(self)
+    
+    def __getTotalBurstTime__(self):
+        total_time = 0
+        for i in range(self.num_processes):
+            print(self.process_list[i])
+            total_time += int(self.process_list[i].burst_time)
+        return total_time
+            
+            
     def sortListByArrivalTime(self): 
         self.process_list.sort(key=lambda x: x.arrival_time) 
         return self.process_list
@@ -38,6 +56,30 @@ class process_list():
     def sortListByBurstTime(self):
         self.process_list.sort(key=lambda x: x.burst_time)
         return self.process_list
+    
+    def pop(self):
+        process = self.process_list.pop(0)
+        self.num_processes -= 1
+        return process
+    
+    
+    
+    
+class ProcessListIterator:
+    def __init__(self, process_list):
+        self.process_list = process_list
+        self.index = 0
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.index < len(self.process_list):
+            result = self.process_list.process_list[self.index]
+            self.index += 1
+            return result
+        else:
+            raise StopIteration
         
         
 
@@ -45,12 +87,15 @@ class process_list():
 # Input examples from the Front-end.
 arrival_times = [3,1,2]
 burst_times = [1,2,4]  
-input1 = process_list(arrival_times,burst_times)
-input1.createprocessList()
-input1.sortListByArrivalTime()
-print(input1.__getlist__())
-input1.sortListByBurstTime()
-print(input1.__getlist__())
+
+# input1 = process_list(arrival_times,burst_times)
+# input1.createprocessList()
+# input1.sortListByArrivalTime()
+# print(input1.__getlist__())
+# input1.sortListByBurstTime()
+# print(input1.__getlist__())
+
+
 priorities = [1, 2, 3] # High to Low
 # OR
 quantum_time = 2
